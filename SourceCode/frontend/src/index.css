@@ -1,0 +1,37 @@
+:root {
+  --blue-primary: #007bff;
+  --blue-light: #e6f2ff;
+  --blue-hover: #0056b3;
+  --text-main: #333;
+  --text-muted: #777;
+  --bg-main: #f8f9fa;
+  --bg-sidebar: #fff;
+  --border-color: #eee;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}

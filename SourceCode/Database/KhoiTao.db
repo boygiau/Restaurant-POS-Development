@@ -1,0 +1,107 @@
+DROP DATABASE IF EXISTS ShiftPOS;
+CREATE DATABASE ShiftPOS;
+USE shiftpos;
+
+-- 1. Phân hệ Không gian
+CREATE TABLE KHUVUC (
+    MaKV VARCHAR(10) PRIMARY KEY,
+    TenKV VARCHAR(50) 
+);
+
+CREATE TABLE BAN (
+    MaBan VARCHAR(10) PRIMARY KEY,
+    TenBan VARCHAR(50),
+    TrangThai VARCHAR(50) DEFAULT 'Trống',
+    MaKV VARCHAR(10),
+    FOREIGN KEY (MaKV) REFERENCES KHUVUC(MaKV)
+);
+
+-- 2. Phân hệ Sản phẩm & Dịch vụ
+CREATE TABLE DANHMUC (
+    MaDM VARCHAR(10) PRIMARY KEY,
+    TenDM VARCHAR(100)
+);
+
+CREATE TABLE MONAN (
+    MaMon VARCHAR(10) PRIMARY KEY,
+    TenMon VARCHAR(100),
+    DonGia INT,
+    TrangThai VARCHAR(50) DEFAULT 'Còn hàng',
+    MaDM VARCHAR(10),
+    FOREIGN KEY (MaDM) REFERENCES DANHMUC(MaDM)
+);
+
+-- 3. Phân hệ Nhân sự & Tài khoản
+CREATE TABLE NHANVIEN (
+    MaNV VARCHAR(10) PRIMARY KEY,
+    TenNV VARCHAR(50),
+    VaiTro VARCHAR(50),
+    MucLuong INT DEFAULT 5000000 
+);
+
+CREATE TABLE TAIKHOAN (
+    TenDangNhap VARCHAR(50) PRIMARY KEY,
+    MatKhau VARCHAR(255),
+    MaNV VARCHAR(10) UNIQUE,
+    FOREIGN KEY (MaNV) REFERENCES NHANVIEN(MaNV)
+);
+
+-- 4. Phân hệ Bán hàng & Thu Chi
+CREATE TABLE HOADON (
+    MaHD INT AUTO_INCREMENT PRIMARY KEY,
+    ThoiGianMo DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ThoiGianDong DATETIME NULL,
+    TrangThaiHD VARCHAR(50) DEFAULT 'Chưa thanh toán', 
+    MaBan VARCHAR(10),
+    MaNV VARCHAR(10),
+    FOREIGN KEY (MaBan) REFERENCES BAN(MaBan),
+    FOREIGN KEY (MaNV) REFERENCES NHANVIEN(MaNV)
+);
+
+CREATE TABLE CHITIET_HD (
+    MaHD INT,
+    MaMon VARCHAR(10),
+    SoLuong INT,
+    DonGiaLucBan INT,
+    GhiChu VARCHAR(100),
+    PRIMARY KEY (MaHD, MaMon),
+    FOREIGN KEY (MaHD) REFERENCES HOADON(MaHD),
+    FOREIGN KEY (MaMon) REFERENCES MONAN(MaMon)
+);
+
+CREATE TABLE THUCHI (
+    MaPhieu INT AUTO_INCREMENT PRIMARY KEY,
+    LoaiPhieu VARCHAR(20), 
+    SoTien INT,
+    LyDo VARCHAR(255), 
+    ThoiGian DATETIME DEFAULT CURRENT_TIMESTAMP,
+    NguoiLap VARCHAR(10),
+    FOREIGN KEY (NguoiLap) REFERENCES NHANVIEN(MaNV)
+);
+
+-- THÊM MENU --
+
+-- Xóa sạch Món ăn và Danh mục cũ --
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM MONAN;      
+DELETE FROM DANHMUC;
+
+-- Thêm Danh mục
+INSERT IGNORE INTO DANHMUC (MaDM, TenDM) VALUES 
+('DM1', 'Đồ ăn'), 
+('DM2', 'Đồ uống'),
+('DM3', 'Món gọi thêm');
+
+-- Thêm Món ăn
+INSERT IGNORE INTO MONAN (MaMon, TenMon, DonGia, TrangThai, MaDM) VALUES
+('M1', 'Cafe Đen Đá', 25000, 'Còn hàng', 'DM2'),
+('M2', 'Bạc Xỉu', 30000, 'Còn hàng', 'DM2'),
+('M3', 'Trà Đào Cam Sả', 35000, 'Còn hàng', 'DM2'),
+('M4', 'Cacao Sữa', 30000, 'Còn hàng', 'DM2'),
+('M5', 'Trà Sâm Dứa', 5000, 'Còn hàng', 'DM2'),
+('M6', 'Bún Cá Niêu Gạo Lứt', 55000, 'Còn hàng', 'DM1'),
+('M7', 'Bún Nghệ Cá Sá Sùng', 55000, 'Còn hàng', 'DM1'),
+('M8', 'Miến Khoai Lang Cá Tầm', 65000, 'Còn hàng', 'DM1'),
+('M9', 'Bún Cá Niêu Gạo Lứt Đặc Biệt', 85000, 'Còn hàng', 'DM1'),
+('M10','Chả Mọc Cá', 25000, 'Còn hàng', 'DM3'),
+('M11', 'Bún Nghệ Cá Sá Sùng Đặc Biệt', 85000, 'Còn hàng', 'DM1');
