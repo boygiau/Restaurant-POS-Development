@@ -1,0 +1,1417 @@
+% =====================================================================
+%  Biên dịch: pdfLaTeX (Overleaf mặc định, chạy 2 lần để cập nhật mục lục)
+% =====================================================================
+\documentclass[12pt,a4paper]{report}
+
+% ---------- Tiếng Việt (pdfLaTeX) ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+
+% ---------- Trình bày trang ----------
+\usepackage[a4paper,left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{1.25em}
+\setlength{\parskip}{0.4em}
+
+% ---------- Bảng biểu ----------
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{ragged2e}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+% ---------- Hình ảnh & nền trang bìa ----------
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{background}
+
+% ---------- Màu, link, code ----------
+\usepackage{xcolor}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Báo cáo thực tập - ShiftPOS},
+  pdfauthor={B23DCCE060 Nguyễn Minh Tuấn Kiệt},
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black
+}
+
+% ---------- Danh sách ----------
+\usepackage{enumitem}
+
+% ---------- Toán học ----------
+\usepackage{amsmath}
+
+% ---------- Tiêu đề chương ----------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries\filcenter}
+  {\chaptertitlename\ \thechapter}{12pt}{\LARGE}
+\titlespacing*{\chapter}{0pt}{10pt}{24pt}
+\renewcommand{\chaptername}{CHƯƠNG}
+
+% ---------- Style code Python ----------
+\lstdefinestyle{mypython}{
+  language=Python,
+  backgroundcolor=\color{black!5},
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!80!black}\bfseries,
+  stringstyle=\color{green!60!black},
+  commentstyle=\color{gray}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  extendedchars=true,
+  inputencoding=utf8
+}
+
+% ---------- Style code SQL ----------
+\lstdefinestyle{mysql}{
+  language=SQL,
+  backgroundcolor=\color{blue!4},
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!80!black}\bfseries,
+  stringstyle=\color{orange!70!black},
+  commentstyle=\color{gray}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  extendedchars=true,
+  inputencoding=utf8,
+  morekeywords={USE,DROP,CREATE,DATABASE,TABLE,TRIGGER,PROCEDURE,FUNCTION,
+    VIEW,DELIMITER,BEGIN,END,IF,THEN,ELSE,DECLARE,SET,CALL,RETURNS,
+    DETERMINISTIC,FOR,EACH,ROW,SIGNAL,SQLSTATE,ON,DUPLICATE,KEY,
+    AUTO_INCREMENT,DEFAULT,PRIMARY,FOREIGN,REFERENCES,CHARACTER,COLLATE,
+    BEFORE,AFTER,INSERT,UPDATE,DELETE,SELECT,FROM,WHERE,AND,OR,NOT,
+    CURRENT_TIMESTAMP,LAST_INSERT_ID,COUNT,SUM,IFNULL,ROUND,NOW,LEFT,JOIN}
+}
+
+% ---------- Style code JavaScript ----------
+\lstdefinestyle{myjs}{
+  language=Java,
+  backgroundcolor=\color{yellow!6},
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{purple!80!black}\bfseries,
+  stringstyle=\color{green!60!black},
+  commentstyle=\color{gray}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  extendedchars=true,
+  inputencoding=utf8,
+  morekeywords={import,export,default,const,let,var,async,await,
+    from,of,return,new,class,extends,super,this,null,undefined,
+    true,false,function,arrow,useCallback,useState,useContext,
+    createContext,Promise,localStorage,window}
+}
+
+% ---------- Lệnh tiện ích ----------
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Khung chèn ảnh tạm thời — xóa \imgplaceholder và bỏ comment \includegraphics khi có ảnh thật
+\newcommand{\imgplaceholder}[2][0.85\textwidth]{%
+  \noindent\fbox{\parbox[c][4.5cm][c]{#1}{%
+    \centering\color{gray}\small\textit{[Chèn ảnh: #2]}%
+  }}%
+}
+
+% =====================================================================
+\begin{document}
+
+% =====================================================================
+% TRANG BÌA
+% =====================================================================
+\begin{titlepage}
+  \backgroundsetup{
+    scale=1,
+    color=black,
+    opacity=0.8,
+    angle=0,
+    position=current page.center,
+    contents={%
+      \includegraphics[width=\paperwidth,height=\paperheight]{background.png}
+    }
+  }
+  \centering
+  \textbf{\large HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG}\\
+  \textbf{\large KHOA CÔNG NGHỆ THÔNG TIN 1}\\
+  \vspace{1cm}
+  \includegraphics[width=3cm]{logo.png}\\
+  \vspace{1cm}
+  {\Large\textbf{BÁO CÁO THỰC TẬP CƠ SỞ}}\\[0.5cm]
+  {\Large\textbf{KHÓA HỌC: THỰC TẬP CƠ SỞ}}\\
+  \vfill
+  {\Large\textbf{ĐỀ TÀI: Xây dựng phần mềm Point-of-Sale (POS) hỗ trợ quản lý bán hàng và đối soát lương nhân sự cho mô hình dịch vụ}}\\
+  \vfill
+  \textbf{Sinh viên thực hiện:}\\
+  \textbf{B23DCCE060 \hspace{0.3cm} Nguyễn Minh Tuấn Kiệt}\\
+  \vfill
+  \textbf{Giảng viên hướng dẫn:}\\
+  \textbf{Thầy: \hspace{0.3cm} Kim Ngọc Bách}\\
+  \vfill
+  \textbf{Class:} D23CQCE06\_B\\
+  \vfill
+  {\large Hà Nội, 06-2026}
+\end{titlepage}
+
+% =====================================================================
+% TRANG NHẬN XÉT GIẢNG VIÊN
+% =====================================================================
+\backgroundsetup{
+  scale=1,
+  color=black,
+  opacity=0,
+  angle=0,
+  position=current page.center,
+  contents={%
+    \includegraphics[width=\paperwidth,height=\paperheight]{background.png}
+  }
+}
+\clearpage
+\thispagestyle{empty}
+\begin{center}
+  {\textbf{\Large NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN}}
+\end{center}
+
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill\vspace{0.25cm}\par
+\dotfill
+
+\vspace{0.6cm}
+{\textbf{\large Điểm: }} \hspace{1.0cm}\textbf{(Bằng chữ:} \hspace{3cm}\textbf{)}
+
+\begin{flushright}
+  Hà Nội, ngày \hspace{0.75cm} tháng \hspace{0.75cm} năm 2026
+
+  \vspace{0.8cm}
+  {\textbf{\large Giảng viên hướng dẫn}}
+\end{flushright}
+
+% =====================================================================
+% LỜI CẢM ƠN
+% =====================================================================
+\backgroundsetup{
+  scale=1,
+  color=black,
+  opacity=0,
+  angle=0,
+  position=current page.center,
+  contents={}
+}
+\clearpage
+\chapter*{LỜI CẢM ƠN}
+\addcontentsline{toc}{chapter}{Lời cảm ơn}
+
+Dự án này là kết quả của hơn một học kỳ em tự tìm hiểu và xây dựng, nhưng không phải một mình. Những kiến thức về lập trình web, cơ sở dữ liệu và thiết kế hệ thống mà các thầy cô trong khoa truyền dạy đã được em dùng trực tiếp -- từng câu SQL, từng khái niệm về phân quyền, từng nguyên tắc tổ chức code đều xuất hiện đâu đó trong bài này.
+
+Em đặc biệt cảm ơn thầy \textbf{Kim Ngọc Bách} đã chỉ ra những chỗ em nghĩ đúng nhưng chưa đúng, giúp em điều chỉnh hướng đi thay vì cứ đi sai mãi.
+
+Dự án chắc chắn còn nhiều chỗ có thể làm tốt hơn. Em mong nhận được góp ý để lần sau làm được tốt hơn lần này.
+
+\vspace{0.5cm}
+\begin{flushright}
+  \textit{Em xin chân thành cảm ơn!}
+\end{flushright}
+
+% =====================================================================
+% MỤC LỤC
+% =====================================================================
+\tableofcontents
+
+% =====================================================================
+% CHƯƠNG 1
+% =====================================================================
+\chapter{MỞ ĐẦU}
+
+\section{Lý do chọn đề tài}
+
+Thử hình dung một buổi trưa bận ở một quán ăn nhỏ: nhân viên phục vụ cầm tờ giấy ghi tay, chạy xuống bếp hét order, rồi cuối bữa ngồi cộng tay từng món cho khách. Chậm, dễ nhầm, và khi chủ quán muốn biết hôm nay thu được bao nhiêu, món nào bán được nhiều -- gần như không trả lời được nếu chỉ dựa vào đống hóa đơn giấy.
+
+Phần mềm POS (Point of Sale -- phần mềm thu ngân tại điểm bán) giải quyết được những vấn đề đó. Tuy nhiên, các phần mềm thương mại trên thị trường thường có phí thuê bao hàng tháng khá cao và đòi phải mua thêm thiết bị riêng -- không phù hợp với quán ăn vừa mới mở hoặc kinh doanh nhỏ.
+
+Vì vậy, em tự xây dựng một phần mềm POS -- đặt tên là \textbf{Foody} -- chạy trên trình duyệt web thông thường, không cần phần cứng chuyên biệt. Đây cũng là cơ hội thực hành đúng nghĩa những gì đã học: giao diện bằng React, phía máy chủ bằng Python/Flask, lưu trữ dữ liệu bằng MySQL.
+
+\section{Tính cấp thiết của đề tài}
+
+Vấn đề của quán ăn nhỏ không chỉ là chậm. Ghi tay dễ nhầm bàn, nhầm món -- khách nhận sai đồ ăn, thu sai tiền. Giờ đông, phục vụ chạy đi chạy lại, bếp không biết ưu tiên nấu gì trước. Và cuối ca, chủ quán muốn biết hôm nay thu bao nhiêu, nhân viên nào phục vụ tốt -- gần như không trả lời được nếu không có dữ liệu.
+
+Một phần mềm POS giải quyết cùng lúc những vấn đề này: order được ghi vào hệ thống ngay lập tức, bếp thấy trực tiếp trên màn hình, thanh toán tự tính tiền, và mọi giao dịch đều lưu lại để báo cáo sau. Phục vụ -- bếp -- thu ngân cùng làm việc trên một nguồn dữ liệu, không cần gọi nhau hay chạy đi chạy lại.
+
+\section{Mục tiêu thực hiện}
+
+\textbf{Mục tiêu chính:} Xây dựng một phần mềm POS hoàn chỉnh cho quán ăn nhỏ, bao trọn luồng làm việc thực tế: nhân viên gọi món $\rightarrow$ bếp nhận và chế biến $\rightarrow$ thu ngân thanh toán $\rightarrow$ quản lý xem báo cáo.
+
+\textbf{Chi tiết hơn:}
+\begin{enumerate}
+  \item Màn hình bán hàng: thấy được toàn bộ sơ đồ bàn trong quán, gọi món nhanh, tiền tạm tính tự cập nhật ngay trên ô bàn.
+  \item Các tình huống thực tế: khách đổi bàn thì chuyển hóa đơn, hai nhóm ngồi chung thì gộp bàn, muốn tách tiền riêng thì tách hóa đơn, áp chiết khấu và VAT khi thanh toán.
+  \item Màn hình bếp: hiển thị hàng đợi món theo thứ tự gọi (ai gọi trước nấu trước -- FIFO), nhân viên bếp tự cập nhật trạng thái từng món.
+  \item Đăng nhập và phân quyền: 4 vai trò khác nhau, mỗi vai trò chỉ làm được những việc của mình.
+  \item Quản trị: thêm/sửa/xóa thực đơn và danh mục, quản lý nhân viên và tài khoản, ghi sổ thu/chi.
+  \item Báo cáo: doanh thu theo ngày/tháng, giờ cao điểm, top món bán chạy, hiệu suất từng nhân viên.
+  \item Giao diện hoàn toàn tiếng Việt, in được hóa đơn ra máy in.
+\end{enumerate}
+
+\section{Phạm vi và giới hạn đề tài}
+
+\textbf{Phần mềm hướng tới:} quán ăn, nhà hàng, quán cà phê quy mô nhỏ đến vừa. Toàn bộ chạy trên trình duyệt web, kết nối trong cùng mạng Wi-Fi của quán -- không cần Internet ra ngoài.
+
+\textbf{Những gì chưa làm được:}
+\begin{itemize}
+  \item \textbf{Quản lý kho và nguyên liệu} (tồn kho, cảnh báo hết hàng) -- đã cân nhắc nhưng bỏ ra ngoài phạm vi để giữ phần mềm gọn, tập trung vào bán hàng.
+  \item \textbf{Thanh toán QR thực tế} -- hiện dùng ảnh QR tĩnh để minh họa giao diện, chưa kết nối được cổng thanh toán của ngân hàng.
+  \item \textbf{Kiểm thử tự động} -- việc kiểm tra tính năng hiện thực hiện thủ công theo quy trình, chưa có bộ test code tự chạy.
+\end{itemize}
+
+% =====================================================================
+% CHƯƠNG 2
+% =====================================================================
+\chapter{TỔNG QUAN LÝ THUYẾT VÀ CÁC TÍNH NĂNG CỦA PHẦN MỀM}
+
+\section{Khái niệm hệ thống POS}
+
+POS (Point of Sale) hiểu đơn giản là phần mềm thu ngân tại điểm bán hàng. Nhưng với nhà hàng, nó làm được nhiều hơn việc tính tiền: nhận order từ phục vụ và chuyển ngay xuống bếp, theo dõi từng bàn đang có khách hay còn trống, lưu lại mọi giao dịch để cuối ngày tổng hợp báo cáo.
+
+Nói cách khác, POS thay thế cho tờ giấy ghi tay, chiếc máy tính cầm tay và sổ doanh thu thủ công -- nối thông tin giữa phục vụ, bếp, thu ngân và chủ quán trong cùng một chỗ.
+
+\section{Các công nghệ nền tảng được sử dụng}
+
+\begin{table}[H]
+\centering
+\caption{Các công nghệ nền tảng}
+\begin{tabularx}{\textwidth}{L{3cm} L{3.5cm} X}
+\toprule
+\textbf{Thành phần} & \textbf{Công nghệ} & \textbf{Vai trò} \\
+\midrule
+Giao diện (Front-end) & React 19 + Vite & Xây dựng giao diện SPA, render nhanh, hot-reload khi phát triển \\
+Định tuyến & React Router DOM & Điều hướng giữa trang đăng nhập và ứng dụng chính \\
+Gọi API & Axios & Giao tiếp HTTP với máy chủ, tự đính kèm token \\
+Biểu đồ & Recharts & Vẽ biểu đồ doanh thu trong báo cáo \\
+In ấn & react-to-print & In hóa đơn từ giao diện trình duyệt \\
+Máy chủ (Back-end) & Python + Flask & Cung cấp REST API theo mô hình blueprint \\
+Xác thực & JWT (PyJWT) + Werkzeug & Sinh token đăng nhập và băm mật khẩu an toàn \\
+Cơ sở dữ liệu & MySQL & Lưu trữ dữ liệu quan hệ; dùng thêm function/procedure/trigger/view \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Tổng quan các tính năng}
+
+Thay vì liệt kê tính năng khô khan, hãy xem phần mềm hoạt động thế nào trong một ca làm việc thực tế:
+
+\textbf{Luồng chính -- từ lúc khách vào đến lúc ra:}
+\begin{enumerate}
+  \item \textbf{Phục vụ} đăng nhập, mở màn hình sơ đồ bàn. Bàn trống hiện màu khác với bàn đang có khách, và mỗi bàn đang phục vụ hiển thị luôn số tiền tạm tính. Khi có khách ngồi, phục vụ chọn bàn, tạo hóa đơn và gọi món từ thực đơn theo danh mục.
+  \item \textbf{Bếp} nhìn thấy món vừa được gọi ngay trên màn hình bếp -- theo thứ tự thời gian gọi (bàn nào gọi trước hiện trước). Bếp bấm chuyển trạng thái: \textit{Chờ chế biến $\rightarrow$ Đang chế biến $\rightarrow$ Xong}.
+  \item \textbf{Thu ngân} nhận bàn muốn thanh toán: chọn hình thức (tiền mặt hoặc chuyển khoản), nhập chiết khấu nếu có, bấm xác nhận. Bàn tự động trở về trống.
+  \item \textbf{Quản lý} vào xem báo cáo: hôm nay thu bao nhiêu, giờ nào đông nhất, món nào bán được nhiều, từng nhân viên phục vụ bao nhiêu bàn.
+\end{enumerate}
+
+\textbf{Các tình huống thực tế hay gặp:}
+\begin{itemize}
+  \item Khách muốn đổi bàn $\rightarrow$ phục vụ chuyển hóa đơn sang bàn mới, toàn bộ món đã gọi đi theo, không mất gì.
+  \item Hai nhóm khách nhập lại một bàn $\rightarrow$ gộp hóa đơn, tiền tự cộng.
+  \item Một bàn muốn tách tiền riêng $\rightarrow$ tách món sang hóa đơn mới, giá giữ nguyên như lúc gọi.
+  \item Ghi thêm khoản thu/chi ngoài hóa đơn (nhập hàng, điện nước...) $\rightarrow$ vào sổ thu/chi, tự tổng kết cuối ngày.
+\end{itemize}
+
+\textbf{Về bảo mật:} Mỗi người đăng nhập tài khoản riêng; phiên đăng nhập hết hạn sau 12 giờ và hệ thống tự đăng xuất. Vai trò quyết định người đó thấy và làm được gì -- nhân viên bếp chỉ thấy màn hình bếp, phục vụ không bấm được nút thanh toán.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{HomePage.png}
+  \caption{Giao diện tổng thể ứng dụng Foody}
+  \label{fig:ui-tong-the}
+\end{figure}
+
+% =====================================================================
+% CHƯƠNG 3
+% =====================================================================
+\chapter{PHÂN TÍCH HỆ THỐNG}
+
+\section{Các chức năng của hệ thống}
+
+Phần mềm được tổ chức thành các nhóm chức năng riêng biệt, mỗi nhóm tương ứng một file Python ở phía máy chủ:
+
+\begin{table}[H]
+\centering
+\caption{Các phân hệ chức năng của hệ thống}
+\begin{tabularx}{\textwidth}{L{4cm} X}
+\toprule
+\textbf{Phân hệ} & \textbf{Chức năng chính} \\
+\midrule
+Xác thực \& Phân quyền & Đăng nhập, lấy thông tin người dùng hiện tại, kiểm soát quyền truy cập \\
+POS (bán hàng) & Quản lý khu vực, bàn, hóa đơn, gọi món, chuyển/gộp bàn, tách hóa đơn, thanh toán \\
+Bếp & Hàng đợi món FIFO, cập nhật trạng thái chế biến \\
+Quản trị thực đơn & CRUD món ăn và danh mục \\
+Quản trị nhân sự & CRUD nhân viên + tài khoản, đặt lại mật khẩu \\
+Thu/Chi & Tạo, xem, xóa phiếu thu/chi \\
+Báo cáo & Tổng quan, doanh thu, theo tháng, hiệu suất nhân viên \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Đối tượng người dùng}
+
+Phần mềm có 4 loại tài khoản, mỗi loại thấy và làm được những gì phù hợp với công việc của mình. Tài khoản \textbf{Quản lý} có thể làm tất cả mọi thứ mà các vai trò khác làm được.
+
+\begin{table}[H]
+\centering
+\caption{Các đối tượng người dùng và quyền hạn}
+\begin{tabularx}{\textwidth}{L{2.2cm} L{3cm} X}
+\toprule
+\textbf{Vai trò} & \textbf{Mô tả} & \textbf{Quyền hạn chính} \\
+\midrule
+\textbf{Quản lý} & Chủ quán / người quản lý & Toàn quyền: bán hàng, quản trị thực đơn, nhân sự, khu vực/bàn, xem báo cáo, xóa phiếu thu chi \\
+\textbf{Thu ngân} & Nhân viên thu ngân & Bán hàng, thanh toán, thao tác bàn/khu vực, thu chi, xem hàng đợi bếp \\
+\textbf{Phục vụ} & Nhân viên phục vụ & Gọi món, chuyển/gộp/tách hóa đơn, thu chi, xem hàng đợi bếp (không được thanh toán) \\
+\textbf{Bếp} & Nhân viên bếp & Xem hàng đợi món và cập nhật trạng thái chế biến; mặc định vào thẳng màn hình Bếp \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Cách phân nhóm quyền trong code:} Thu ngân và Phục vụ được gộp thành \code{SALES\_ROLES} -- cả hai đều làm được các việc bán hàng thông thường. Riêng thanh toán chỉ mở cho Thu ngân (\code{CASHIER\_ROLES}). Mọi thao tác thêm/sửa/xóa dữ liệu (khu vực, bàn, thực đơn, nhân viên) chỉ Quản lý mới được phép.
+
+\section{Yêu cầu chức năng}
+
+\textbf{FR1 -- Đăng nhập:} Người dùng nhập tên và mật khẩu. Nếu đúng, hệ thống trả về một token JWT -- hiểu như một ``vé'' điện tử ghi rõ vai trò của người đó, hết hạn sau 12 giờ. Mọi thao tác sau đó đều phải kèm theo vé này; nếu hết hạn hoặc không hợp lệ, hệ thống từ chối và đăng xuất.
+
+\textbf{FR2 -- Sơ đồ bàn:} Hiển thị toàn bộ khu vực và bàn. Bàn đang có khách hiện khác màu và cho thấy số tiền tạm tính. Quản lý có thể thêm/sửa/xóa khu vực và bàn -- trừ bàn đang có hóa đơn mở (tránh xóa nhầm khi đang phục vụ).
+
+\textbf{FR3 -- Gọi món:} Tạo hóa đơn cho bàn rồi gọi món từ thực đơn. Nếu gọi thêm một món đã có, số lượng tự tăng lên thay vì tạo dòng mới. Giảm số lượng về 0 thì món tự xóa khỏi hóa đơn. Tiền tạm tính theo bàn cập nhật liên tục.
+
+\textbf{FR4 -- Chuyển/Gộp/Tách bàn:}
+\begin{itemize}
+  \item \textit{Chuyển bàn:} toàn bộ hóa đơn chuyển sang bàn mới -- dùng khi khách muốn đổi chỗ.
+  \item \textit{Gộp bàn:} chuyển hóa đơn vào một bàn đang có khách -- hai nhóm ngồi chung một bàn.
+  \item \textit{Tách hóa đơn:} chọn một số món (kèm số lượng) để tách sang hóa đơn mới trên cùng bàn -- dùng khi cùng bàn muốn thanh toán riêng.
+\end{itemize}
+
+\textbf{FR5 -- Thanh toán:} Thu ngân chọn phương thức (tiền mặt hoặc chuyển khoản), nhập chiết khấu và VAT nếu có. Tiền thực thu tính theo công thức:
+\[
+  \text{Tiền thực thu} = \text{Tạm tính} \times (1 - \text{Chiết khấu\%}) \times (1 + \text{VAT\%})
+\]
+Sau khi xác nhận, hóa đơn chuyển sang ``Đã thanh toán'' và bàn tự trống lại -- không cần thao tác thêm.
+
+\textbf{FR6 -- Màn hình bếp:} Hiện toàn bộ món của các bàn đang phục vụ, sắp xếp theo thứ tự thời gian gọi (ai gọi trước hiện trước). Nhân viên bếp bấm cập nhật trạng thái từng món qua 3 bước: \textit{Chờ chế biến $\rightarrow$ Đang chế biến $\rightarrow$ Xong}.
+
+\textbf{FR7 -- Quản trị:} Quản lý thêm/sửa/xóa thực đơn, danh mục món, khu vực và bàn. Khi tạo nhân viên mới, tài khoản đăng nhập được tạo cùng lúc. Đặt lại mật khẩu được tách riêng để tránh vô tình ghi đè.
+
+\textbf{FR8 -- Sổ thu/chi:} Ghi các khoản thu/chi ngoài hóa đơn (nhập hàng, điện nước, tiền lẻ thu thêm...). Phục vụ và Thu ngân đều tạo được phiếu; xóa phiếu chỉ Quản lý được phép. Tổng thu và tổng chi tự cộng dồn.
+
+\textbf{FR9 -- Báo cáo:} Quản lý lọc theo khoảng ngày để xem: tổng doanh thu và số hóa đơn, phân theo phương thức thanh toán, biểu đồ theo giờ trong ngày (để biết giờ nào đông khách nhất), top 3 món bán chạy, và hiệu suất từng nhân viên.
+
+\section{Yêu cầu phi chức năng}
+
+\begin{itemize}
+  \item \textbf{Bảo mật:} Mật khẩu không bao giờ lưu dưới dạng văn bản thường -- được băm bằng thuật toán Werkzeug trước khi vào cơ sở dữ liệu. Phân quyền được kiểm tra ở cả hai phía: phía máy chủ (decorator \code{require\_role}) từ chối nếu vai trò không đủ, và phía giao diện (\code{hasRole}) ẩn nút/tab không được phép dùng.
+  \item \textbf{Không rò rỉ kết nối:} Mỗi lần có yêu cầu từ người dùng, hệ thống mở một kết nối MySQL mới, dùng xong thì đóng lại ngay. Cách này tránh tình trạng giữ quá nhiều kết nối mở cùng lúc khi quán đông.
+  \item \textbf{Giao diện không bị dừng khi mạng chập chờn:} Nếu một thao tác ghi thất bại do lỗi mạng tạm thời, giao diện vẫn phản hồi ngay cho người dùng thay vì đứng chờ -- tuy nhiên dữ liệu sẽ không được lưu lại nếu không kết nối lại được.
+  \item \textbf{Dữ liệu nhất quán dù nhiều người cùng thao tác:} Việc đóng hóa đơn và trả bàn về trống được xử lý bởi trigger trong cơ sở dữ liệu -- điều này đảm bảo dù phục vụ và thu ngân cùng thao tác lúc đó, bàn vẫn chỉ trống đúng một lần.
+  \item \textbf{Dễ bảo trì:} Mỗi nhóm chức năng một file riêng, cấu hình kết nối (mật khẩu DB, cổng, khóa JWT) đặt qua biến môi trường thay vì ghi cứng trong code.
+\end{itemize}
+
+% =====================================================================
+% CHƯƠNG 4
+% =====================================================================
+\chapter{THIẾT KẾ HỆ THỐNG}
+
+\section{Kiến trúc tổng thể}
+
+Phần mềm chia thành 3 tầng rõ ràng -- mỗi tầng làm một việc, không xâm phạm vào tầng kia:
+
+\begin{Verbatim}[frame=single,fontsize=\small]
++------------------+  HTTP/JSON   +------------------+  SQL  +----------+
+|    FRONT-END     | -----------> |    BACK-END       | ----> |  MySQL   |
+| React 19 + Vite  | (Axios+JWT)  | Flask REST API    |       | ShiftPOS |
+|  (Trinh duyet)   | <----------- | (Blueprints)      | <---- |          |
++------------------+              +------------------+        +----------+
+\end{Verbatim}
+
+\textbf{Khi người dùng bấm một nút trên giao diện}, luồng diễn ra như sau: giao diện gửi yêu cầu HTTP đến máy chủ Flask, kèm theo token JWT trong header. Flask kiểm tra token và vai trò, nếu hợp lệ thì chạy hàm xử lý tương ứng. Hàm đó dùng \code{db.py} để truy vấn MySQL và trả kết quả về dạng JSON. Giao diện nhận JSON và cập nhật màn hình. Nếu token hết hạn hoặc bị từ chối (lỗi 401), giao diện tự xóa thông tin đăng nhập và chuyển về trang đăng nhập -- người dùng không thấy màn hình trắng hay lỗi khó hiểu.
+
+\section{Thiết kế Back-end}
+
+Phía máy chủ dùng \textbf{Flask} (Python). Thay vì nhét mọi thứ vào một file, code được tách ra thành từng file nhỏ theo chức năng -- mỗi file gọi là một \textit{blueprint}. File \code{app.py} chỉ có nhiệm vụ gom các blueprint lại và khởi động server:
+
+\begin{table}[H]
+\centering
+\caption{Danh sách các blueprint back-end}
+\begin{tabularx}{\textwidth}{L{2.8cm} L{3.2cm} X}
+\toprule
+\textbf{File} & \textbf{Tiền tố URL} & \textbf{Nghiệp vụ} \\
+\midrule
+\code{auth.py} & \code{/api/auth} & Đăng nhập, thông tin người dùng, decorator phân quyền \\
+\code{pos.py} & \code{/api} & Khu vực, bàn, thực đơn, hóa đơn, gọi món, chuyển/gộp/tách, thanh toán \\
+\code{kitchen.py} & \code{/api/kitchen} & Hàng đợi bếp, cập nhật trạng thái món \\
+\code{admin.py} & \code{/api/admin} & CRUD thực đơn \& danh mục \\
+\code{staff.py} & \code{/api/staff} & CRUD nhân viên \& tài khoản \\
+\code{thuchi.py} & \code{/api/thuchi} & Sổ thu/chi \\
+\code{reports.py} & \code{/api/reports} & Báo cáo, thống kê \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Ngoài ra còn có:}
+\begin{itemize}
+  \item \code{config.py}: đọc cấu hình (mật khẩu DB, cổng, khóa JWT...) từ biến môi trường -- để không ghi cứng thông tin nhạy cảm trong code.
+  \item \code{db.py}: lớp kết nối MySQL. Mỗi request vào, file này mở một kết nối mới; xong thì đóng lại. Các hàm \code{query} (lấy nhiều dòng), \code{query\_one} (lấy 1 dòng), \code{execute} (ghi và commit) được dùng ở mọi nơi trong code thay vì viết SQL lặp đi lặp lại.
+  \item \code{init\_db.py}: chạy một lần duy nhất để tạo toàn bộ bảng và dữ liệu mẫu -- thay thế cho việc copy/paste SQL vào MySQL Workbench.
+\end{itemize}
+
+\begin{lstlisting}[style=mypython,
+  caption={File \texttt{db.py} -- Lớp truy cập CSDL: quản lý kết nối và các helper query/execute},
+  label=lst:python-db]
+# db.py -- Quan ly ket noi MySQL theo tung request (luu trong flask.g)
+import mysql.connector
+from flask import g
+from config import Config
+
+def get_conn():
+    """Lay ket noi MySQL cho request hien tai; tao moi neu chua co."""
+    if "db_conn" not in g:
+        g.db_conn = mysql.connector.connect(
+            host=Config.DB_HOST, port=Config.DB_PORT,
+            user=Config.DB_USER,  password=Config.DB_PASSWORD,
+            database=Config.DB_NAME, charset="utf8mb4", autocommit=False,
+        )
+    return g.db_conn
+
+def close_conn(_exc=None):
+    conn = g.pop("db_conn", None)
+    if conn is not None:
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+def query(sql, params=None):
+    """SELECT nhieu dong, tra ve list[dict]."""
+    cur = get_conn().cursor(dictionary=True)
+    cur.execute(sql, params or ())
+    rows = cur.fetchall(); cur.close()
+    return rows
+
+def query_one(sql, params=None):
+    """SELECT 1 dong, tra ve dict hoac None."""
+    cur = get_conn().cursor(dictionary=True)
+    cur.execute(sql, params or ())
+    row = cur.fetchone(); cur.close()
+    return row
+
+def execute(sql, params=None):
+    """INSERT / UPDATE / DELETE: commit va tra ve lastrowid."""
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute(sql, params or ())
+    last_id = cur.lastrowid
+    cur.close(); conn.commit()
+    return last_id
+
+def callproc(proc_name, args=()):
+    """Goi stored procedure, commit, tra ve ket qua."""
+    conn = get_conn()
+    cur = conn.cursor(dictionary=True)
+    cur.callproc(proc_name, args)
+    rows = cur.fetchall(); cur.close(); conn.commit()
+    return rows
+
+def init_app(app):
+    app.teardown_appcontext(close_conn)
+\end{lstlisting}
+
+\begin{lstlisting}[style=mypython,
+  caption={File \texttt{app.py} -- App-factory: đăng ký blueprint và khởi tạo Flask},
+  label=lst:python-app]
+from flask import Flask, jsonify
+from flask_cors import CORS
+import db
+from config import Config
+from auth import auth_bp
+from pos import pos_bp
+from kitchen import kitchen_bp
+from admin import admin_bp
+from reports import reports_bp
+from staff import staff_bp
+from thuchi import thuchi_bp
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    CORS(app)            # cho phep frontend (Vite dev server) goi API
+    db.init_app(app)     # dong ket noi MySQL khi ket thuc request
+
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(pos_bp)
+    app.register_blueprint(kitchen_bp)
+    app.register_blueprint(admin_bp)
+    app.register_blueprint(reports_bp)
+    app.register_blueprint(staff_bp)
+    app.register_blueprint(thuchi_bp)
+
+    @app.route("/api/health")
+    def health():
+        return jsonify({"status": "ok"})
+
+    @app.errorhandler(400)
+    def bad_request(_e):
+        return jsonify({"error": "Yeu cau khong hop le"}), 400
+
+    @app.errorhandler(404)
+    def not_found(_e):
+        return jsonify({"error": "Khong tim thay"}), 404
+
+    @app.errorhandler(500)
+    def server_error(_e):
+        return jsonify({"error": "Loi may chu noi bo"}), 500
+
+    return app
+
+app = create_app()
+
+if __name__ == "__main__":
+    app.run(host=Config.HOST, port=Config.PORT, debug=Config.DEBUG)
+\end{lstlisting}
+
+\textbf{Cách hoạt động của phân quyền:}
+
+Khi đăng nhập thành công, server tạo một token JWT -- bên trong token ghi tên đăng nhập, mã nhân viên và vai trò. Token này gửi kèm vào mọi request sau đó như một cái vé để chứng minh danh tính.
+
+Mỗi hàm API được gắn một decorator \code{@require\_role(...)}. Khi có request đến, decorator đọc token, lấy vai trò ra và so sánh. Viết \code{@require\_role()} không có tham số nghĩa là chỉ Quản lý mới vào được. Quản lý thì không cần khai báo riêng -- code tự cho qua tất cả.
+
+\begin{lstlisting}[style=mypython,
+  caption={File \texttt{auth.py} -- Decorator \texttt{require\_role} (RBAC) và endpoint đăng nhập},
+  label=lst:python-auth]
+# auth.py -- Xac thuc & Phan quyen theo vai tro (RBAC)
+from functools import wraps
+import jwt
+from flask import Blueprint, request, jsonify, g
+from werkzeug.security import check_password_hash
+from config import Config
+from db import query_one
+
+auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
+
+def require_auth(fn):
+    """Yeu cau token JWT hop le; gan thong tin user vao g.current_user."""
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        token = (request.headers.get("Authorization", "") or "")[7:].strip()
+        if not token:
+            return jsonify({"error": "Thieu token xac thuc"}), 401
+        try:
+            g.current_user = jwt.decode(
+                token, Config.JWT_SECRET, algorithms=[Config.JWT_ALGORITHM])
+        except jwt.ExpiredSignatureError:
+            return jsonify({"error": "Phien dang nhap da het han"}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({"error": "Token khong hop le"}), 401
+        return fn(*args, **kwargs)
+    return wrapper
+
+def require_role(*roles):
+    """Kiem tra vai tro. 'Quan ly' luon duoc phep (toan quyen).
+    Goi khong tham so: require_role() = chi Quan ly."""
+    def decorator(fn):
+        @wraps(fn)
+        @require_auth
+        def wrapper(*args, **kwargs):
+            vai_tro = g.current_user.get("VaiTro")
+            if vai_tro != "Quan ly" and vai_tro not in roles:
+                return jsonify({"error": "Ban khong co quyen truy cap"}), 403
+            return fn(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@auth_bp.route("/login", methods=["POST"])
+def login():
+    data = request.get_json(silent=True) or {}
+    username = (data.get("TenDangNhap") or "").strip()
+    password = data.get("MatKhau") or ""
+    row = query_one(
+        "SELECT TK.TenDangNhap, TK.MatKhau, NV.MaNV, NV.TenNV, NV.VaiTro "
+        "FROM TAIKHOAN TK JOIN NHANVIEN NV ON TK.MaNV = NV.MaNV "
+        "WHERE TK.TenDangNhap = %s", (username,))
+    if not row or not check_password_hash(row["MatKhau"], password):
+        return jsonify({"error": "Sai ten dang nhap hoac mat khau"}), 401
+    token = jwt.encode(
+        {"TenDangNhap": row["TenDangNhap"],
+         "MaNV": row["MaNV"], "VaiTro": row["VaiTro"]},
+        Config.JWT_SECRET, algorithm=Config.JWT_ALGORITHM)
+    return jsonify({"token": token,
+                    "user": {"TenDangNhap": row["TenDangNhap"],
+                             "MaNV": row["MaNV"], "TenNV": row["TenNV"],
+                             "VaiTro": row["VaiTro"]}})
+\end{lstlisting}
+
+\begin{lstlisting}[style=mypython,
+  caption={File \texttt{pos.py} -- Route thanh toán \texttt{POST /api/checkout/\{maHd\}}},
+  label=lst:python-checkout]
+# pos.py -- Dinh nghia nhom quyen
+SALES_ROLES   = ("Thu ngan", "Phuc vu")   # nghiep vu ban hang
+CASHIER_ROLES = ("Thu ngan",)              # chi thu ngan duoc thanh toan
+
+# POST /api/checkout/<mahd> -- Thanh toan hoa don
+@pos_bp.route("/checkout/<int:mahd>", methods=["POST"])
+@require_role(*CASHIER_ROLES)
+def checkout(mahd):
+    data = request.get_json(silent=True) or {}
+    pttt        = data.get("PhuongThucTT", "Tien mat")
+    chiet_khau  = float(data.get("ChietKhau", 0) or 0)  # phan tram
+    thue_vat    = float(data.get("ThueVAT", 0) or 0)    # phan tram
+
+    inv = query_one("SELECT TrangThaiHD FROM HOADON WHERE MaHD=%s", (mahd,))
+    if not inv:
+        return jsonify({"error": "Khong tim thay hoa don"}), 404
+    if inv["TrangThaiHD"] == "Da thanh toan":
+        return jsonify({"error": "Hoa don da duoc thanh toan"}), 409
+
+    # Trigger trg_DonBan_SauThanhToan tu set ThoiGianDong va don ban
+    execute(
+        "UPDATE HOADON SET TrangThaiHD='Da thanh toan', "
+        "PhuongThucTT=%s, ChietKhau=%s, ThueVAT=%s WHERE MaHD=%s",
+        (pttt, chiet_khau, thue_vat, mahd),
+    )
+    return jsonify({"message": "Thanh toan thanh cong"})
+\end{lstlisting}
+
+\begin{lstlisting}[style=mypython,
+  caption={File \texttt{pos.py} -- Route gọi món: thêm và giảm số lượng món trong hóa đơn},
+  label=lst:python-order]
+# POST /api/order -- Them mon vao hoa don (tang SoLuong neu mon da co)
+@pos_bp.route("/order", methods=["POST"])
+@require_role(*SALES_ROLES)
+def add_order():
+    data = request.get_json(silent=True) or {}
+    mahd, mamon = data.get("MaHD"), data.get("MaMon")
+    if not mahd or not mamon:
+        return jsonify({"error": "Thieu MaHD hoac MaMon"}), 400
+    mon = query_one("SELECT DonGia FROM MONAN WHERE MaMon=%s", (mamon,))
+    if not mon:
+        return jsonify({"error": "Khong tim thay mon"}), 404
+    # ON DUPLICATE KEY: tang SoLuong, reset TrangThaiMon ve "Cho che bien"
+    execute(
+        "INSERT INTO CHITIET_HD "
+        "  (MaHD, MaMon, SoLuong, DonGiaLucBan, TrangThaiMon, ThoiGianGoi) "
+        "VALUES (%s, %s, 1, %s, 'Cho che bien', NOW()) "
+        "ON DUPLICATE KEY UPDATE SoLuong = SoLuong + 1, "
+        "  TrangThaiMon='Cho che bien', ThoiGianGoi=NOW()",
+        (mahd, mamon, mon["DonGia"]),
+    )
+    return jsonify({"message": "Da them mon"})
+
+# POST /api/order/decrease -- Giam so luong; xoa dong neu ve 0
+@pos_bp.route("/order/decrease", methods=["POST"])
+@require_role(*SALES_ROLES)
+def decrease_order():
+    data = request.get_json(silent=True) or {}
+    mahd, mamon = data.get("MaHD"), data.get("MaMon")
+    row = query_one(
+        "SELECT SoLuong FROM CHITIET_HD WHERE MaHD=%s AND MaMon=%s",
+        (mahd, mamon)
+    )
+    if not row:
+        return jsonify({"error": "Mon khong co trong hoa don"}), 404
+    if row["SoLuong"] <= 1:
+        execute("DELETE FROM CHITIET_HD WHERE MaHD=%s AND MaMon=%s",
+                (mahd, mamon))
+    else:
+        execute("UPDATE CHITIET_HD SET SoLuong = SoLuong - 1 "
+                "WHERE MaHD=%s AND MaMon=%s", (mahd, mamon))
+    return jsonify({"message": "Da giam so luong"})
+\end{lstlisting}
+
+\begin{lstlisting}[style=mypython,
+  caption={File \texttt{kitchen.py} -- Hàng đợi bếp FIFO và cập nhật trạng thái món},
+  label=lst:python-kitchen]
+# kitchen.py -- Man hinh Bep: hang doi mon theo thu tu thoi gian (FIFO)
+from flask import Blueprint, request, jsonify
+from auth import require_role
+from db import query, query_one, execute
+
+kitchen_bp = Blueprint("kitchen", __name__, url_prefix="/api/kitchen")
+KITCHEN_ROLES = ("Bep", "Phuc vu", "Thu ngan")
+VALID_STATUS  = ("Cho che bien", "Dang che bien", "Xong")
+
+@kitchen_bp.route("/queue", methods=["GET"])
+@require_role(*KITCHEN_ROLES)
+def queue():
+    """Tat ca mon cua hoa don CHUA thanh toan, sap xep FIFO (ThoiGianGoi ASC)."""
+    rows = query(
+        "SELECT CT.MaHD, CT.MaMon, M.TenMon, DM.TenDM AS Loai, "
+        "CT.SoLuong, CT.TrangThaiMon, CT.ThoiGianGoi, H.MaBan, B.TenBan "
+        "FROM CHITIET_HD CT "
+        "JOIN HOADON H  ON CT.MaHD  = H.MaHD "
+        "JOIN MONAN M   ON CT.MaMon = M.MaMon "
+        "LEFT JOIN DANHMUC DM ON M.MaDM = DM.MaDM "
+        "JOIN BAN B     ON H.MaBan  = B.MaBan "
+        "WHERE H.TrangThaiHD = 'Chua thanh toan' "
+        "ORDER BY CT.ThoiGianGoi ASC"
+    )
+    return jsonify(rows)
+
+@kitchen_bp.route("/update_status", methods=["POST"])
+@require_role(*KITCHEN_ROLES)
+def update_status():
+    data = request.get_json(silent=True) or {}
+    mahd       = data.get("MaHD")
+    mamon      = data.get("MaMon")
+    trang_thai = data.get("TrangThaiMon")
+    if not mahd or not mamon or trang_thai not in VALID_STATUS:
+        return jsonify({"error": "Du lieu khong hop le"}), 400
+    if not query_one(
+        "SELECT 1 FROM CHITIET_HD WHERE MaHD=%s AND MaMon=%s", (mahd, mamon)
+    ):
+        return jsonify({"error": "Khong tim thay mon trong hoa don"}), 404
+    execute(
+        "UPDATE CHITIET_HD SET TrangThaiMon=%s WHERE MaHD=%s AND MaMon=%s",
+        (trang_thai, mahd, mamon),
+    )
+    return jsonify({"message": "Da cap nhat trang thai mon"})
+\end{lstlisting}
+
+\begin{table}[H]
+\centering
+\caption{Một số API tiêu biểu}
+\begin{tabularx}{\textwidth}{L{2cm} L{5.5cm} L{1.8cm} X}
+\toprule
+\textbf{Phương thức} & \textbf{Đường dẫn} & \textbf{Quyền} & \textbf{Mô tả} \\
+\midrule
+POST & \code{/api/auth/login} & công khai & Đăng nhập \\
+GET & \code{/api/areas}, \code{/api/tables}, \code{/api/menu} & sales & Lấy dữ liệu nền \\
+POST & \code{/api/invoice/create/\{maBan\}} & sales & Tạo hóa đơn \\
+POST & \code{/api/order} \texttt{/} \code{/api/order/decrease} & sales & Thêm/giảm món \\
+POST & \code{/api/tables/move\_merge} & sales & Chuyển/gộp bàn \\
+POST & \code{/api/invoice/split} & sales & Tách hóa đơn \\
+POST & \code{/api/checkout/\{maHd\}} & cashier & Thanh toán \\
+GET/POST & \code{/api/kitchen/queue}, \code{/update\_status} & bếp & Hàng đợi \& trạng thái món \\
+GET & \code{/api/reports/overview} & Quản lý & Báo cáo tổng quan \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{lstlisting}[style=mypython,
+  caption={File \texttt{thuchi.py} -- Sổ thu/chi: tạo, liệt kê và xóa phiếu},
+  label=lst:python-thuchi]
+# thuchi.py -- So Thu/Chi (ghi nhan cac khoan thu/chi ngoai hoa don)
+from flask import Blueprint, request, jsonify, g
+from auth import require_role
+from db import query, query_one, execute
+
+thuchi_bp = Blueprint("thuchi", __name__, url_prefix="/api/thuchi")
+LEDGER_ROLES = ("Thu ngan", "Phuc vu")
+
+def _current_manv():
+    user = getattr(g, "current_user", None)
+    return user.get("MaNV") if user else None
+
+# GET /api/thuchi -- Lay danh sach phieu + tong thu/chi
+@thuchi_bp.route("", methods=["GET"])
+@require_role(*LEDGER_ROLES)
+def list_thuchi():
+    rows = query(
+        """SELECT TC.MaPhieu, TC.LoaiPhieu, TC.SoTien, TC.LyDo,
+                  TC.ThoiGian, TC.NguoiLap, NV.TenNV
+           FROM THUCHI TC
+           LEFT JOIN NHANVIEN NV ON TC.NguoiLap = NV.MaNV
+           ORDER BY TC.ThoiGian DESC"""
+    )
+    tong_thu = sum((r["SoTien"] or 0) for r in rows if r["LoaiPhieu"] == "Thu")
+    tong_chi = sum((r["SoTien"] or 0) for r in rows if r["LoaiPhieu"] == "Chi")
+    return jsonify({"items": rows, "TongThu": tong_thu, "TongChi": tong_chi})
+
+# POST /api/thuchi -- Tao phieu (NguoiLap lay tu JWT token)
+@thuchi_bp.route("", methods=["POST"])
+@require_role(*LEDGER_ROLES)
+def create_thuchi():
+    d = request.get_json(silent=True) or {}
+    loai = (d.get("LoaiPhieu") or "").strip()
+    lydo = (d.get("LyDo") or "").strip()
+    try:
+        sotien = int(d.get("SoTien") or 0)
+    except (ValueError, TypeError):
+        return jsonify({"error": "So tien khong hop le"}), 400
+    if loai not in ("Thu", "Chi"):
+        return jsonify({"error": "LoaiPhieu phai la 'Thu' hoac 'Chi'"}), 400
+    if sotien <= 0:
+        return jsonify({"error": "So tien phai lon hon 0"}), 400
+    maphieu = execute(
+        "INSERT INTO THUCHI (LoaiPhieu, SoTien, LyDo, NguoiLap) "
+        "VALUES (%s,%s,%s,%s)",
+        (loai, sotien, lydo, _current_manv()),
+    )
+    return jsonify({"message": "Tao phieu thanh cong", "MaPhieu": maphieu}), 201
+
+# DELETE /api/thuchi/<maphieu> -- Chi Quan ly duoc xoa phieu
+@thuchi_bp.route("/<int:maphieu>", methods=["DELETE"])
+@require_role()
+def delete_thuchi(maphieu):
+    if not query_one("SELECT 1 FROM THUCHI WHERE MaPhieu=%s", (maphieu,)):
+        return jsonify({"error": "Khong tim thay phieu"}), 404
+    execute("DELETE FROM THUCHI WHERE MaPhieu=%s", (maphieu,))
+    return jsonify({"message": "Da xoa phieu"})
+\end{lstlisting}
+
+\begin{lstlisting}[style=mypython,
+  caption={File \texttt{staff.py} -- Quản lý nhân viên và tài khoản (chỉ Quản lý)},
+  label=lst:python-staff]
+# staff.py -- CRUD Nhan vien + Tai khoan, chi Quan ly truy cap
+from flask import Blueprint, request, jsonify
+from werkzeug.security import generate_password_hash
+from auth import require_role
+from db import query, query_one, execute
+
+staff_bp  = Blueprint("staff", __name__, url_prefix="/api/staff")
+VALID_ROLES = ("Quan ly", "Thu ngan", "Phuc vu", "Bep")
+
+# GET /api/staff -- Danh sach nhan vien kem ten dang nhap
+@staff_bp.route("", methods=["GET"])
+@require_role("Phuc vu", "Thu ngan", "Bep")
+def list_staff():
+    return jsonify(query(
+        "SELECT NV.MaNV, NV.TenNV, NV.VaiTro, NV.MucLuong, TK.TenDangNhap "
+        "FROM NHANVIEN NV LEFT JOIN TAIKHOAN TK ON NV.MaNV=TK.MaNV "
+        "ORDER BY NV.MaNV"
+    ))
+
+# POST /api/staff -- Tao nhan vien + tai khoan cung luc
+@staff_bp.route("", methods=["POST"])
+@require_role()
+def create_staff():
+    d           = request.get_json(silent=True) or {}
+    manv        = d.get("MaNV", "").strip()
+    tennv       = d.get("TenNV", "").strip()
+    vaitro      = d.get("VaiTro", "").strip()
+    tendangnhap = d.get("TenDangNhap", "").strip()
+    matkhau     = d.get("MatKhau", "").strip()
+    muluong     = int(d.get("MucLuong", 5000000) or 5000000)
+    if not manv or not tennv or vaitro not in VALID_ROLES:
+        return jsonify({"error": "Thieu thong tin hoac VaiTro khong hop le"}), 400
+    if not tendangnhap or len(matkhau) < 6:
+        return jsonify({"error": "Thieu TenDangNhap hoac mat khau < 6 ky tu"}), 400
+    if query_one("SELECT 1 FROM NHANVIEN WHERE MaNV=%s", (manv,)):
+        return jsonify({"error": "Ma nhan vien da ton tai"}), 409
+    if query_one("SELECT 1 FROM TAIKHOAN WHERE TenDangNhap=%s", (tendangnhap,)):
+        return jsonify({"error": "Ten dang nhap da ton tai"}), 409
+    execute(
+        "INSERT INTO NHANVIEN (MaNV, TenNV, VaiTro, MucLuong) VALUES (%s,%s,%s,%s)",
+        (manv, tennv, vaitro, muluong),
+    )
+    execute(
+        "INSERT INTO TAIKHOAN (TenDangNhap, MatKhau, MaNV) VALUES (%s,%s,%s)",
+        (tendangnhap, generate_password_hash(matkhau), manv),
+    )
+    return jsonify({"message": "Tao nhan vien thanh cong", "MaNV": manv}), 201
+
+# DELETE /api/staff/<manv> -- Xoa nhan vien (khong cho xoa neu da co hoa don)
+@staff_bp.route("/<manv>", methods=["DELETE"])
+@require_role()
+def delete_staff(manv):
+    if not query_one("SELECT 1 FROM NHANVIEN WHERE MaNV=%s", (manv,)):
+        return jsonify({"error": "Khong tim thay nhan vien"}), 404
+    if query_one("SELECT 1 FROM HOADON WHERE MaNV=%s", (manv,)):
+        return jsonify({"error": "Nhan vien da co hoa don, khong the xoa"}), 409
+    execute("DELETE FROM TAIKHOAN WHERE MaNV=%s", (manv,))
+    execute("DELETE FROM NHANVIEN WHERE MaNV=%s", (manv,))
+    return jsonify({"message": "Da xoa nhan vien"})
+
+# PUT /api/staff/<manv>/password -- Quan ly dat lai mat khau
+@staff_bp.route("/<manv>/password", methods=["PUT"])
+@require_role()
+def change_password(manv):
+    new_pw = (request.get_json(silent=True) or {}).get("MatKhau", "").strip()
+    if len(new_pw) < 6:
+        return jsonify({"error": "Mat khau phai co it nhat 6 ky tu"}), 400
+    execute(
+        "UPDATE TAIKHOAN SET MatKhau=%s WHERE MaNV=%s",
+        (generate_password_hash(new_pw), manv),
+    )
+    return jsonify({"message": "Da doi mat khau thanh cong"})
+\end{lstlisting}
+
+\section{Thiết kế Front-end}
+
+Giao diện được xây bằng \textbf{React 19} -- toàn bộ là một trang web duy nhất, khi bấm nút chỉ cập nhật phần cần thiết mà không tải lại trang. Điều này giúp ứng dụng phản hồi nhanh như app trên máy tính bàn.
+
+\textbf{Các file chính:}
+\begin{itemize}
+  \item \code{main.jsx}: điểm khởi động. Ở đây có \code{ProtectedRoute} -- nếu chưa đăng nhập mà cố vào trang chính, sẽ bị chuyển về trang đăng nhập ngay.
+  \item \code{App.jsx}: màn hình chính sau khi đăng nhập -- chứa thanh tab (POS, Bếp, Hóa đơn, Thực đơn, Nhân viên, Báo cáo) và toàn bộ các popup nghiệp vụ (gọi món, thanh toán, chuyển bàn...).
+  \item \code{AuthContext.jsx}: nơi lưu thông tin người đang đăng nhập và cung cấp hàm \code{hasRole()} cho toàn ứng dụng.
+  \item \code{api.js}: cầu nối với máy chủ -- tự gắn token vào mọi request và tự xử lý khi token hết hạn.
+  \item \code{components/}: các màn hình độc lập -- đăng nhập, bếp, hóa đơn, thu/chi, quản lý thực đơn, quản lý nhân viên.
+\end{itemize}
+
+\textbf{Phân quyền trên giao diện:} Hàm \code{hasRole()} kiểm tra vai trò người đang đăng nhập trước khi hiện một tab hay một nút. Ví dụ: tab ``Nhân viên'' chỉ render khi đang dùng tài khoản Quản lý; tài khoản Bếp đăng nhập vào thì ứng dụng tự nhảy thẳng sang tab Bếp.
+
+\begin{lstlisting}[style=myjs,
+  caption={File \texttt{api.js} -- Axios instance dùng chung: tự đính JWT và tự đăng xuất khi hết hạn},
+  label=lst:js-api]
+import axios from 'axios';
+
+// Mot axios instance dung chung cho toan app.
+// Tu dinh kem JWT token va tu dang xuat khi token het han (401).
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:5000',
+});
+
+// Request interceptor: dinh Bearer token vao moi request
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Response interceptor: bat loi 401 -> tu xoa token va chuyen ve login
+api.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    if (err.response && err.response.status === 401) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      // Tranh vong lap neu dang o trang login
+      if (!window.location.pathname.startsWith('/login')) {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(err);
+  }
+);
+
+export default api;
+\end{lstlisting}
+
+\begin{lstlisting}[style=myjs,
+  caption={File \texttt{AuthContext.jsx} -- Quản lý trạng thái đăng nhập và hàm \texttt{hasRole}},
+  label=lst:js-authctx]
+import { createContext, useContext, useState, useCallback } from 'react';
+import api from './api';
+
+const AuthContext = createContext(null);
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(() => {
+    const raw = localStorage.getItem('user');
+    return raw ? JSON.parse(raw) : null;
+  });
+
+  const login = useCallback(async (TenDangNhap, MatKhau) => {
+    const res = await api.post('/api/auth/login', { TenDangNhap, MatKhau });
+    localStorage.setItem('token', res.data.token);
+    localStorage.setItem('user', JSON.stringify(res.data.user));
+    setUser(res.data.user);
+    return res.data.user;
+  }, []);
+
+  const logout = useCallback(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+  }, []);
+
+  // 'Quan ly' co toan quyen -- hasRole(...) kiem tra vai tro
+  const hasRole = useCallback(
+    (...roles) => !!user && (user.VaiTro === 'Quan ly' || roles.includes(user.VaiTro)),
+    [user]
+  );
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout, hasRole }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth phai dung ben trong <AuthProvider>');
+  return ctx;
+}
+\end{lstlisting}
+
+\section{Thiết kế cơ sở dữ liệu}
+
+Cơ sở dữ liệu đặt tên là \code{ShiftPOS}, dùng MySQL với bộ ký tự \code{utf8mb4} để lưu được tiếng Việt đầy đủ. Các bảng chính:
+
+\begin{table}[H]
+\centering
+\caption{Các bảng chính trong cơ sở dữ liệu}
+\begin{tabularx}{\textwidth}{L{2.8cm} L{3.5cm} X}
+\toprule
+\textbf{Bảng} & \textbf{Ý nghĩa} & \textbf{Trường tiêu biểu} \\
+\midrule
+\code{KHUVUC} & Khu vực & \code{MaKV}, \code{TenKV} \\
+\code{BAN} & Bàn & \code{MaBan}, \code{TenBan}, \code{TrangThai}, \code{MaKV} \\
+\code{DANHMUC} & Danh mục món & \code{MaDM}, \code{TenDM} \\
+\code{MONAN} & Món ăn/thức uống & \code{MaMon}, \code{TenMon}, \code{DonGia}, \code{TrangThai}, \code{MaDM} \\
+\code{NHANVIEN} & Nhân viên & \code{MaNV}, \code{TenNV}, \code{VaiTro}, \code{MucLuong} \\
+\code{TAIKHOAN} & Tài khoản đăng nhập & \code{TenDangNhap}, \code{MatKhau} (hash), \code{MaNV} \\
+\code{HOADON} & Hóa đơn & \code{MaHD}, \code{TrangThaiHD}, \code{PhuongThucTT}, \code{ChietKhau}, \code{ThueVAT}, \code{ThoiGianMo}, \code{ThoiGianDong}, \code{MaBan}, \code{MaNV} \\
+\code{CHITIET\_HD} & Chi tiết hóa đơn & \code{MaHD}, \code{MaMon}, \code{SoLuong}, \code{DonGiaLucBan}, \code{TrangThaiMon}, \code{ThoiGianGoi} \\
+\code{THUCHI} & Phiếu thu/chi & \code{MaPhieu}, \code{LoaiPhieu}, \code{SoTien}, \code{LyDo}, \code{NguoiLap} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{lstlisting}[style=mysql,
+  caption={File \texttt{KhoiTao.sql} -- Định nghĩa bảng \texttt{HOADON} và \texttt{CHITIET\_HD}},
+  label=lst:sql-tables]
+-- KhoiTao.sql: Schema co so du lieu ShiftPOS
+DROP DATABASE IF EXISTS ShiftPOS;
+CREATE DATABASE ShiftPOS CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ShiftPOS;
+
+-- Bang hoa don: moi phien ban tai 1 ban
+CREATE TABLE HOADON (
+    MaHD         INT AUTO_INCREMENT PRIMARY KEY,
+    ThoiGianMo   DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ThoiGianDong DATETIME NULL,
+    TrangThaiHD  VARCHAR(50) DEFAULT 'Chua thanh toan',
+    PhuongThucTT VARCHAR(50) DEFAULT 'Tien mat',
+    ChietKhau    DECIMAL(5,2) DEFAULT 0,    -- % chiet khau
+    ThueVAT      DECIMAL(5,2) DEFAULT 0,    -- % VAT
+    MaBan        VARCHAR(10),
+    MaNV         VARCHAR(10),
+    FOREIGN KEY (MaBan) REFERENCES BAN(MaBan),
+    FOREIGN KEY (MaNV)  REFERENCES NHANVIEN(MaNV)
+);
+
+-- Bang chi tiet: tung mon trong moi hoa don
+CREATE TABLE CHITIET_HD (
+    MaHD         INT,
+    MaMon        VARCHAR(10),
+    SoLuong      INT,
+    DonGiaLucBan INT,          -- gia tai thoi diem ban (bat bien khi doi gia sau)
+    GhiChu       VARCHAR(100),
+    TrangThaiMon VARCHAR(30) DEFAULT 'Cho che bien',  -- trang thai bep
+    ThoiGianGoi  DATETIME DEFAULT CURRENT_TIMESTAMP,  -- dung de sap xep FIFO
+    PRIMARY KEY  (MaHD, MaMon),
+    FOREIGN KEY  (MaHD)  REFERENCES HOADON(MaHD),
+    FOREIGN KEY  (MaMon) REFERENCES MONAN(MaMon)
+);
+\end{lstlisting}
+
+\textbf{Các đối tượng CSDL bổ sung} (trong \code{ChucNang.sql}):
+\begin{itemize}
+  \item \textbf{Hàm \code{fn\_TinhTienBan}:} tính tổng tiền tạm tính của một bàn bằng một câu SQL. Back-end gọi hàm này bất cứ khi nào cần hiển thị số tiền trên ô bàn, thay vì tính lại trong Python.
+  \item \textbf{Thủ tục \code{sp\_ChuyenBan}, \code{sp\_GopBan}:} chứa logic chuyển/gộp hóa đơn giữa các bàn. Gom logic phức tạp vào CSDL để back-end chỉ cần gọi một lệnh.
+  \item \textbf{Trigger \code{trg\_DonBan\_SauThanhToan}:} tự động chạy ngay khi hóa đơn chuyển sang ``Đã thanh toán''. Trigger này ghi thời gian đóng và kiểm tra: nếu bàn đó không còn hóa đơn nào đang mở thì tự trả bàn về ``Trống''. Nhờ trigger, back-end không cần viết thêm bước này sau mỗi lần thanh toán.
+  \item \textbf{View \code{vw\_DoanhThuTheoNgay}, \code{vw\_BaoCaoThuChi}:} câu truy vấn tổng hợp sẵn để phần báo cáo dùng, tránh lặp SQL phức tạp ở nhiều chỗ.
+\end{itemize}
+
+\begin{lstlisting}[style=mysql,
+  caption={File \texttt{ChucNang.sql} -- Hàm \texttt{fn\_TinhTienBan} và Trigger \texttt{trg\_DonBan\_SauThanhToan}},
+  label=lst:sql-trigger]
+-- [F01] fn_TinhTienBan: Tinh tien tam tinh cua mot ban
+DELIMITER //
+CREATE FUNCTION fn_TinhTienBan(p_MaBan VARCHAR(10))
+RETURNS INT DETERMINISTIC
+BEGIN
+    DECLARE Tong INT;
+    SELECT SUM(CT.SoLuong * CT.DonGiaLucBan) INTO Tong
+    FROM HOADON H JOIN CHITIET_HD CT ON H.MaHD = CT.MaHD
+    WHERE H.MaBan = p_MaBan AND H.TrangThaiHD = 'Chua thanh toan';
+    RETURN IFNULL(Tong, 0);
+END //
+
+-- [T01] trg_DonBan_SauThanhToan (BEFORE UPDATE ON HOADON)
+-- Khi hoa don -> 'Da thanh toan': set ThoiGianDong, tra ban ve 'Trong'
+-- neu khong con hoa don nao dang mo tren ban do.
+CREATE TRIGGER trg_DonBan_SauThanhToan
+BEFORE UPDATE ON HOADON
+FOR EACH ROW
+BEGIN
+    IF NEW.TrangThaiHD = 'Da thanh toan'
+       AND OLD.TrangThaiHD <> 'Da thanh toan' THEN
+        SET NEW.ThoiGianDong = CURRENT_TIMESTAMP;
+        -- Kiem tra con hoa don chua thanh toan nao tren ban khong
+        IF (SELECT COUNT(*) FROM HOADON
+            WHERE MaBan = NEW.MaBan
+              AND TrangThaiHD = 'Chua thanh toan'
+              AND MaHD <> NEW.MaHD) = 0 THEN
+            UPDATE BAN SET TrangThai = 'Trong' WHERE MaBan = NEW.MaBan;
+        END IF;
+    END IF;
+END //
+DELIMITER ;
+\end{lstlisting}
+
+\textbf{Các giá trị trạng thái lưu trong CSDL:}
+\begin{itemize}
+  \item Bàn: \code{'Trống'} (chưa có khách) hoặc \code{'Đang phục vụ'} (đang có hóa đơn mở).
+  \item Hóa đơn: \code{'Chưa thanh toán'} hoặc \code{'Đã thanh toán'}.
+  \item Món trong hóa đơn: \code{'Chờ chế biến'} $\rightarrow$ \code{'Đang chế biến'} $\rightarrow$ \code{'Xong'}.
+  \item Hình thức thanh toán: \code{'Tiền mặt'} hoặc \code{'Chuyển khoản'}.
+\end{itemize}
+
+\textbf{Một lưu ý về thiết kế:} Cột \code{DonGiaLucBan} lưu giá tại thời điểm khách gọi món, không tham chiếu lại bảng \code{MONAN}. Điều này đảm bảo: nếu sau này chủ quán đổi giá món, những hóa đơn cũ vẫn giữ đúng số tiền ban đầu -- giống như hóa đơn giấy đã in ra không thể sửa ngược lại.
+
+\textbf{Sơ đồ EER} mô tả đầy đủ các thực thể, thuộc tính và mối quan hệ giữa các bảng trong cơ sở dữ liệu ShiftPOS:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{ERR.png}
+  \caption{Sơ đồ EER -- Cơ sở dữ liệu ShiftPOS}
+  \label{fig:eer}
+\end{figure}
+
+\section{Thiết kế giao diện hệ thống}
+
+Giao diện dùng tông màu nâu -- kem ấm áp, gợi cảm giác của quán cà phê hay nhà hàng (màu chủ đạo \code{\#8B5E3C}, nền \code{\#FAF4EE}, bàn đang có khách hiện cam \code{\#E8956D}). Dưới đây là các màn hình chính theo từng vai trò.
+
+\textbf{Màn hình đăng nhập:} nhập tên tài khoản và mật khẩu. Nếu thông tin đúng, hệ thống tự chuyển vào ứng dụng và nhớ đăng nhập cho đến khi hết 12 giờ hoặc bấm đăng xuất.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{Login.png}
+  \caption{Màn hình đăng nhập của hệ thống}
+  \label{fig:ui-login}
+\end{figure}
+
+\textbf{Màn hình POS -- sơ đồ bàn:} bên trái là toàn bộ bàn trong quán, chia theo khu vực, mỗi ô bàn hiện tên và số tiền đang tạm tính. Bàn trống màu nhạt, bàn đang có khách hiện cam sậm. Bên phải là thực đơn và hóa đơn của bàn đang chọn.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{HomePage.png}
+  \caption{Màn hình POS chính — sơ đồ bàn theo khu vực}
+  \label{fig:ui-pos}
+\end{figure}
+
+\textbf{Popup thanh toán:} thu ngân chọn hình thức thanh toán, nhập chiết khấu và VAT nếu có, hệ thống tự tính tiền thực thu. Sau khi xác nhận có thể in hóa đơn ra máy in.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{Thanhtoan.png}
+  \caption{Modal thanh toán hóa đơn}
+  \label{fig:ui-checkout}
+\end{figure}
+
+\textbf{Màn hình Bếp:} hiện toàn bộ món của các bàn đang phục vụ, sắp xếp theo thứ tự thời gian gọi -- bàn nào gọi trước hiện trước. Nhân viên bếp bấm chuyển trạng thái từng món khi bắt đầu nấu và khi xong.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Fifo.png}
+  \caption{Màn hình Bếp (Kitchen Display) — hàng đợi món theo thứ tự FIFO}
+  \label{fig:ui-kitchen}
+\end{figure}
+
+\textbf{Màn hình Hóa đơn:} lịch sử toàn bộ hóa đơn đã thanh toán, có thể lọc theo ngày và phương thức thanh toán.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Invoice.png}
+  \caption{Màn hình Hóa đơn — lịch sử thanh toán}
+  \label{fig:ui-invoices}
+\end{figure}
+
+\textbf{Màn hình Thực đơn:} hiển thị các món chia theo danh mục, Quản lý thêm/sửa/xóa món và danh mục trực tiếp tại đây.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Type.png}
+  \caption{Màn hình quản lý thực đơn và danh mục}
+  \label{fig:ui-menu}
+\end{figure}
+
+\textbf{Màn hình Nhân viên:} Quản lý xem danh sách nhân viên kèm tên tài khoản đăng nhập, thêm người mới, sửa thông tin, hoặc đặt lại mật khẩu khi nhân viên quên.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{nhanvien.png}
+  \caption{Màn hình quản lý nhân viên và tài khoản}
+  \label{fig:ui-staff}
+\end{figure}
+
+\textbf{Màn hình Thu Chi:} ghi các khoản thu/chi ngoài hóa đơn -- ví dụ tiền nhập hàng, tiền điện, hay khoản thu lẻ. Cuối trang tự tổng kết tổng thu và tổng chi.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{thuchi.png}
+  \caption{Màn hình sổ Thu -- Chi}
+  \label{fig:ui-thuchi}
+\end{figure}
+
+\textbf{Màn hình Báo cáo:} Quản lý lọc theo khoảng ngày để xem: tổng doanh thu, biểu đồ doanh thu theo từng giờ trong ngày (để biết giờ nào đông nhất), top 3 món bán chạy nhất, và bảng hiệu suất từng nhân viên.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Report.png}
+  \caption{Màn hình Báo cáo -- thống kê doanh thu và hiệu suất}
+  \label{fig:ui-report}
+\end{figure}
+
+% =====================================================================
+% CHƯƠNG 5
+% =====================================================================
+\chapter{HIỆU QUẢ SỬ DỤNG VÀ HƯỚNG PHÁT TRIỂN}
+
+\section{Hiệu quả sử dụng}
+
+So sánh trực tiếp với cách quản lý bằng giấy tờ:
+
+\begin{itemize}
+  \item \textbf{Không còn nhầm order:} Món gọi từ bàn nào, do nhân viên nào tạo đều được lưu rõ. Bếp nhìn màn hình thay vì giải mã chữ viết tay.
+  \item \textbf{Bếp và phục vụ không cần hét nhau:} Món vừa gọi hiện ngay trên màn hình bếp theo đúng thứ tự thời gian. Bếp cập nhật ``Xong'', phục vụ biết đi lấy món mang ra.
+  \item \textbf{Thanh toán nhanh hơn:} Không cần ngồi cộng tay. Thu ngân mở hóa đơn bàn, bấm thanh toán, bàn tự trống -- cả quy trình dưới 30 giây.
+  \item \textbf{Chủ quán biết con số thực:} Cuối ngày vào Báo cáo là thấy ngay doanh thu, giờ nào bận nhất, món nào đang chạy, nhân viên nào năng suất -- không cần ngồi tổng hợp từ đống hóa đơn giấy.
+  \item \textbf{Không tốn thêm thiết bị:} Chạy trên trình duyệt, máy tính hay máy tính bảng đang có trong quán dùng được ngay.
+\end{itemize}
+
+\section{Hướng phát triển trong tương lai}
+
+Những thứ mà phiên bản này chưa làm được nhưng hoàn toàn có thể bổ sung sau:
+
+\begin{itemize}
+  \item \textbf{Thanh toán QR thực tế:} kết nối với ngân hàng/ví điện tử để sinh mã QR theo từng hóa đơn thay vì dùng ảnh tĩnh như hiện tại.
+  \item \textbf{Quản lý kho:} theo dõi nguyên liệu, tự trừ kho khi bán món, cảnh báo khi gần hết hàng.
+  \item \textbf{Ứng dụng điện thoại cho phục vụ:} dùng điện thoại gọi món trực tiếp tại bàn thay vì chạy về quầy.
+  \item \textbf{Khách tự gọi món:} khách quét QR tại bàn và đặt món từ điện thoại của họ.
+  \item \textbf{Nhiều chi nhánh:} hiện tại chạy được cho một địa điểm; mở rộng để quản lý chuỗi quán với báo cáo tổng hợp.
+  \item \textbf{Test tự động:} thêm bộ kiểm thử code tự chạy để phát hiện lỗi sớm khi thêm tính năng mới.
+\end{itemize}
+
+% =====================================================================
+% CHƯƠNG 6
+% =====================================================================
+\chapter{KẾT LUẬN}
+
+\section{Tóm tắt quá trình hoàn thành}
+
+Em bắt đầu từ việc quan sát cách một số quán ăn nhỏ đang làm việc và xác định những điểm bất tiện cần giải quyết. Từ đó, em thiết kế cơ sở dữ liệu, xây dựng API phía máy chủ, rồi dựng giao diện -- theo thứ tự: màn hình POS cơ bản $\rightarrow$ đăng nhập và phân quyền $\rightarrow$ màn hình bếp $\rightarrow$ các thao tác nâng cao (chuyển/gộp/tách bàn) $\rightarrow$ báo cáo.
+
+Mỗi tính năng sau khi xây xong được kiểm thử thủ công theo đúng quy trình thực tế: phục vụ gọi món $\rightarrow$ bếp cập nhật trạng thái $\rightarrow$ thu ngân thanh toán $\rightarrow$ quản lý kiểm tra báo cáo.
+
+\section{Kết quả đạt được}
+
+Phần mềm Foody đã hoạt động đầy đủ với toàn bộ tính năng đã đề ra:
+
+\begin{itemize}
+  \item Đăng nhập và phân quyền 4 vai trò -- kiểm soát ở cả máy chủ lẫn giao diện.
+  \item Màn hình POS: sơ đồ bàn, gọi món, tạm tính, chuyển/gộp bàn, tách hóa đơn.
+  \item Thanh toán hỗ trợ chiết khấu và VAT; bàn tự trống sau khi thanh toán.
+  \item Màn hình bếp hiển thị hàng đợi FIFO và cập nhật trạng thái chế biến.
+  \item Quản trị thực đơn, nhân viên và sổ thu/chi.
+  \item Báo cáo doanh thu, giờ cao điểm, top món bán chạy, hiệu suất nhân viên.
+  \item Giao diện tiếng Việt, in được hóa đơn ra máy in.
+\end{itemize}
+
+\section{Đánh giá kết quả}
+
+\textbf{Điểm làm được tốt:}
+\begin{itemize}
+  \item Bám sát quy trình thực tế của một quán ăn -- không chỉ gọi món và thanh toán mà còn xử lý được các tình huống hay gặp như đổi bàn, nhóm nhập chung, tách tiền riêng.
+  \item Code tổ chức rõ ràng -- mỗi chức năng một file, dễ tìm và dễ sửa sau này.
+  \item Dùng trigger trong cơ sở dữ liệu để xử lý logic bàn trống -- đảm bảo trạng thái dữ liệu luôn đúng dù có nhiều người cùng thao tác.
+\end{itemize}
+
+\textbf{Còn thiếu:}
+\begin{itemize}
+  \item Chưa có quản lý kho nguyên liệu.
+  \item Thanh toán QR hiện chỉ là hình minh họa, chưa kết nối thực tế.
+  \item Kiểm thử vẫn làm tay, chưa có code test tự động.
+\end{itemize}
+
+Nhìn lại, em thấy dự án đạt được những gì đề ra ban đầu. Quan trọng hơn, em hiểu sâu hơn về cách xây dựng một ứng dụng web thực sự -- không chỉ viết code chạy được, mà còn phải nghĩ đến luồng nghiệp vụ, phân quyền, tính nhất quán dữ liệu và trải nghiệm người dùng.
+
+\vspace{1.5cm}
+\begin{center}
+  \textit{--- Hết ---}
+\end{center}
+
+% =====================================================================
+\chapter*{TÀI LIỆU THAM KHẢO}
+\addcontentsline{toc}{chapter}{Tài liệu tham khảo}
+% =====================================================================
+
+\begin{enumerate}[leftmargin=*, label={[\arabic*]}]
+
+  % ----- Hệ thống POS & quản lý nhà hàng -----
+  \item A. K. Sharma, R. Kumar, and S. Singh,
+        ``Design and Implementation of a Cloud-Based Point-of-Sale System for Small Restaurant Businesses,''
+        \textit{International Journal of Advanced Computer Science and Applications (IJACSA)},
+        vol. 13, no. 4, pp. 178--185, 2022.
+
+  \item H. T. Nguyen, M. Q. Tran, and L. V. Pham,
+        ``Applying RESTful API Architecture in Building a Web-Based Restaurant Ordering and Management System,''
+        in \textit{Proc. IEEE RIVF International Conference on Computing and Communication Technologies},
+        Hanoi, Vietnam, 2023, pp. 1--6.
+
+  \item C. Borza and M. Frentu,
+        ``Digital Transformation in Food Service Industry: A Study on POS System Adoption and Workflow Efficiency,''
+        \textit{Procedia Computer Science}, vol. 221, pp. 893--900, 2023.
+
+  % ----- Kiến trúc web & REST API -----
+  \item R. T. Fielding,
+        ``Architectural Styles and the Design of Network-based Software Architectures,''
+        Ph.D. dissertation, Dept. of Information and Computer Science,
+        University of California, Irvine, CA, USA, 2000.
+
+  \item L. Richardson and S. Ruby,
+        \textit{RESTful Web Services}.
+        Sebastopol, CA: O'Reilly Media, 2007.
+
+  % ----- Xác thực & phân quyền -----
+  \item R. S. Sandhu, E. J. Coyne, H. L. Feinstein, and C. E. Youman,
+        ``Role-Based Access Control Models,''
+        \textit{IEEE Computer}, vol. 29, no. 2, pp. 38--47, Feb. 1996.
+
+  \item M. Jones, J. Bradley, and N. Sakimura,
+        ``JSON Web Token (JWT),''
+        RFC 7519, Internet Engineering Task Force (IETF), May 2015.
+        [Online]. Available: \texttt{https://datatracker.ietf.org/doc/html/rfc7519}.
+
+  % ----- Lập trình front-end -----
+  \item D. Flanagan,
+        \textit{JavaScript: The Definitive Guide}, 7th ed.
+        Sebastopol, CA: O'Reilly Media, 2020.
+
+  % ----- Cơ sở dữ liệu -----
+  \item R. Elmasri and S. B. Navathe,
+        \textit{Fundamentals of Database Systems}, 7th ed.
+        Hoboken, NJ: Pearson Education, 2015.
+
+  % ----- Kỹ thuật phần mềm -----
+  \item R. C. Martin,
+        \textit{Clean Code: A Handbook of Agile Software Craftsmanship}.
+        Upper Saddle River, NJ: Prentice Hall, 2008.
+
+\end{enumerate}
+
+\end{document}
