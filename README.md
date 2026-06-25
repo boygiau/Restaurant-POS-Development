@@ -37,9 +37,3 @@ Dự án được xây dựng nhằm cung cấp một giải pháp quản trị 
 - **Backend:** Python (FastAPI / Django) với cơ chế giao tiếp thời gian thực WebSockets.
 - **Cơ sở dữ liệu:** MySQL.
 
-## 🚀 Hướng dẫn cài đặt (Installation & Setup)
-
-### Yêu cầu hệ thống (Prerequisites)
-- Node.js & npm
-- Python 3.x
-- MySQL Server
